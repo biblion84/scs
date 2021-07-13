@@ -148,6 +148,13 @@ func (s *SessionManager) Destroy(ctx context.Context) error {
 	return nil
 }
 
+// HasSession return a boolean that indicate if a session is present
+// you can now call the other methods without fear of a panic
+func (s *SessionManager) HasSession(ctx context.Context) bool {
+	_, ok := ctx.Value(s.contextKey).(*sessionData)
+	return ok
+}
+
 // Put adds a key and corresponding value to the session data. Any existing
 // value for the key will be replaced. The session data status will be set to
 // Modified.
